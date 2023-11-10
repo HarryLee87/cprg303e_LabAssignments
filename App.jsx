@@ -6,6 +6,7 @@
 
 import React from 'react';
 import {
+  Alert,
   Image,
   SafeAreaView,
   StyleSheet,
@@ -15,18 +16,29 @@ import {
 import ToDoList from './ToDoList';
 import ToDoForm from './ToDoForm';
 
-function App(): JSX.Element {
+
+
+function App() {
   const [tasks, setTasks] = React.useState([
     'Do laundry',
     'Go to gym',
     'Walk dog'
   ]);
 
+  const addTask = (taskText) =>{
+    if(tasks.includes(taskText)){
+      Alert.alert('Same task is existed on the list!')
+    } else{
+      setTasks([...tasks, taskText]);
+    }
+    
+  };
+
 
   return (
     <SafeAreaView>      
       <ToDoList tasks={tasks} />
-      <ToDoForm />
+      <ToDoForm addTask={addTask} />
     </SafeAreaView>
   );
 }
